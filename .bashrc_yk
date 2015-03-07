@@ -1,0 +1,79 @@
+###########################################################################
+####################### START Node ########################################
+###########################################################################
+export NVM_HOME="$HOME/.nvm"
+if [[ -f "$NVM_HOME/nvm.sh" ]]
+then
+  source "$NVM_HOME/nvm.sh"
+fi
+
+# tab completion for NVM
+
+if [[ -f "$NVM_HOME/bash_completion" ]]
+then
+  source "$NVM_HOME/bash_completion"
+fi
+
+# tab completion for npm
+
+if npm -v > /dev/null 2>&1
+then
+  . <(npm completion)
+fi
+###########################################################################
+####################### END Node ##########################################
+###########################################################################
+
+# Change the PS1
+  export PS1="${debian_chroot:+($debian_chroot)}\u@\h:\W\$ "
+
+# change directory to /bash_scripts
+  cd /bash_scripts
+
+# google_appengine path
+  export GOOGLE_APP_ENGINE_PATH="/temp/google_appengine"
+
+# python path
+  export PYTHONPATH="/python/modules/"
+
+# AngularJS app builder path
+  export ANGULARBUILD="/python/ngproject"
+
+# for coursera-dl
+  export PATH="$PATH:/python/coursera/coursera-dl/"
+
+# add some stuff to the path
+  export PATH="$PATH:/bash_scripts:/python:$GOOGLE_APP_ENGINE_PATH:$ANGULARBUILD"
+
+# for git
+  ## colored output
+  git config --global color.ui auto
+  ## set default editor to sublime text 3
+  git config --global core.editor subl
+  ## set default usename/email
+  git config --global user.name "yahyaKacem"
+  git config --global user.email "fuj.tyoli@gmail.com"
+
+# for gulp tasks auto-completion
+  eval "$(gulp --completion=bash)"
+
+
+## store the $PATH and aliases to check on logout if during the
+## current session the user make some changes to them and on logout save
+## changes to $PATH and aliases in files and notify user about them
+mkdir -p -m a=rwx "/tmp/bash_tmp/"
+alias | md5sum > "/tmp/bash_tmp/aliases1"
+echo $PATH | md5sum > "/tmp/bash_tmp/path1"
+
+### some helper functions
+
+## update angular to lated dev-version
+ng-update() {
+  bower install --save angular#$1 angular-animate#$1 angular-sanitize#$1 angular-aria#$1 angular-cookies#$1
+}
+
+## recursive-statistics-on-file-types-in-directory
+### source http://unix.stackexchange.com/questions/18506/recursive-statistics-on-file-types-in-directory
+files_stats() {
+  find $1 -type f | sed 's/.*\.//' | sort | uniq -c
+}

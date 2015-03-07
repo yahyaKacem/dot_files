@@ -1,0 +1,13 @@
+[user]
+	name = yahyaKacem
+	email = fuj.tyoli@gmail.com
+[credential]
+	helper = cache
+[color]
+	ui = auto
+[core]
+	editor = subl
+[push]
+	default = current
+[http]
+	postBuffer = 100M
