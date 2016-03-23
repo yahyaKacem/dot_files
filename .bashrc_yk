@@ -45,11 +45,22 @@ fi
 # add some stuff to the path
   export PATH="$PATH:/bash_scripts:/python:$GOOGLE_APP_ENGINE_PATH:$ANGULARBUILD"
 
+# for sbt and play framework:
+  export PATH="$PATH:/usr/tools/sbt/bin"
+  export PATH="$PATH:/temp/Logs/activator-1.2.12"
+
+# for phpbrew
+#  export PHPBREW_SET_PROMPT=1
+#  source /home/yahya/.phpbrew/bashrc
+
+# for cwebp/dwebp:
+  export PATH="$PATH:/temp/Logs/libwebp-0.4.3-linux-x86-64/bin"
+
 # for git
   ## colored output
   git config --global color.ui auto
   ## set default editor to sublime text 3
-  git config --global core.editor subl
+  ## git config --global core.editor subl
   ## set default usename/email
   git config --global user.name "yahyaKacem"
   git config --global user.email "fuj.tyoli@gmail.com"
@@ -76,4 +87,129 @@ ng-update() {
 ### source http://unix.stackexchange.com/questions/18506/recursive-statistics-on-file-types-in-directory
 files_stats() {
   find $1 -type f | sed 's/.*\.//' | sort | uniq -c
+}
+
+## github create repository helper
+github-create() {
+  repo_name=$1
+
+  dir_name=`basename $(pwd)`
+
+  if [ "$repo_name" = "" ]; then
+    echo "Repo name (hit enter to use '$dir_name')?"
+    read repo_name
+  fi
+
+  if [ "$repo_name" = "" ]; then
+    repo_name=$dir_name
+  fi
+
+  username=`git config github.user`
+  if [ "$username" = "" ]; then
+    echo "Could not find username, run 'git config --global github.user <username>'"
+    invalid_credentials=1
+  fi
+
+  token=`git config github.token`
+  if [ "$token" = "" ]; then
+    echo "Could not find token, run 'git config --global github.token <token>'"
+    invalid_credentials=1
+  fi
+
+  if [ "$invalid_credentials" == "1" ]; then
+    return 1
+  fi
+
+  echo -n "Creating Github repository '$repo_name' ..."
+  curl -u "$username:$token" https://api.github.com/user/repos -d '{"name":"'$repo_name'"}' > /dev/null 2>&1
+  echo " done."
+
+  echo -n "Pushing local code to remote ..."
+  git remote add origin git@github.com:$username/$repo_name.git > /dev/null 2>&1
+  git push -u origin master > /dev/null 2>&1
+  echo " done."
+}
+
+# update stuff
+
+clns () {
+  sudo aptitude clean
+  sudo apt-get autoremove
+  sudo apt-get autoclean
+  sudo apt-get clean
+  sudo aptitude purge `dpkg -l 'linux-*' | sed '/^ii/!d;/'"$(uname -r | sed "s/\(.*\)-\([^0-9]\+\)/\1/")"'/d;s/^[^ ]* [^ ]* \([^ ]*\).*/\1/;/[0-9]/!d'`
+}
+
+upg () {
+  sudo apt upgrade -y
+}
+
+up () {
+  sudo apt update
+}
+
+upg_no_up () {
+  upg
+  clns
+}
+
+upg_no_clns () {
+  up
+  upg
+}
+
+full_update_clns () {
+  up
+  upg
+  clns
+}
+
+gscm() {
+  git stash
+  git checkout master
+}
+
+gscmp() {
+  gscm
+  git pull
+}
+
+gscmpc() {
+  gscmp
+  git checkout "$1"
+}
+
+gscmpcm() {
+  gscmpc "$1"
+  git merge master
+}
+
+gscmpcm() {
+  gscmpcm "$1"
+
+}
+
+gcmp() {
+  git checkout master
+  git pull
+}
+
+gcmpm() {
+  gcmp
+  git merge "$1"
+}
+
+gcmpmp() {
+  gcmpm "$1"
+  git push
+}
+
+gcmpc() {
+  gcmp
+  git checkout "$1"
+}
+
+gcmpcm() {
+  gcmpc "$1"
+  git merge master
 }
