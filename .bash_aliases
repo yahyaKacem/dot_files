@@ -76,5 +76,7 @@ alias bashlogout='sudo gedit ~/bash_logout'
 alias bashaliases='sudo gedit ~/bash_aliases'
 
 # system stuff
+alias scannet='sudo iwlist wlan0 scanning'
 alias rstapch='sudo service apache2 restart'
 alias rstnet='sudo service network-manager restart'
+alias showPcks='sudo dpkg -l | grep '

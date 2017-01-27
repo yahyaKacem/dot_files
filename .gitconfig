@@ -2,12 +2,21 @@
 	name = yahyaKacem
 	email = fuj.tyoli@gmail.com
 [credential]
-	helper = cache
+	helper = cache --timeout=3600
 [color]
 	ui = auto
 [core]
 	editor = subl
+	trustctime = false
+	filemode = false
 [push]
-	default = current
+  default = current
 [http]
-	postBuffer = 100M
+  postBuffer = 100M
+[diff]
+  external = /usr/local/bin/git-diff.sh
+[merge]
+	tool = meld
+[github]
+	user = yahyaKacem
+	token = 5416c6abf4b0e407265dbcca8c8c33dbb98d4e5b
