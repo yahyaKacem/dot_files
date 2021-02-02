@@ -32,24 +32,6 @@ alias gch="git config --global credential.helper cache"
 alias gct="git config --global credential.helper 'cache --timeout=3600'"
 alias glp='git log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=short'
 
-# gulp aliases
-alias gd="gulp dist"
-alias gw="gulp watch"
-alias gbld="gulp build"
-alias gjslint="gulp jslint"
-alias ghtmllint="gulp htmlhint"
-
-# bower aliases
-alias bls='bower ls'
-alias bs='bower search'
-alias bi='bower install'
-alias bui='bower uninstall'
-alias bis='bower install --save'
-alias buis='bower uninstall --save'
-
-# httpster alias
-alias httpster='/usr/local/lib/node_modules/httpster/bin/httpster'
-
 # adding alias for mkdir all rights make parent if not
 alias mkdirall='mkdir -p -m a=rwx'
 
@@ -71,11 +53,6 @@ alias teamviewerstatus='sudo teamviewer --daemon status'
 alias teamviewerdisable='sudo teamviewer --daemon disable'
 alias teamviewerrestart='sudo teamviewer --daemon restart'
 
-# gedit aliasses
-alias bashrc='sudo gedit ~/bashrc_yk'
-alias bashlogout='sudo gedit ~/bash_logout'
-alias bashaliases='sudo gedit ~/bash_aliases'
-
 # system stuff
 alias scannet='sudo iwlist wlp2s0 scanning'
 alias rstapch='sudo service apache2 restart'
@@ -90,6 +67,3 @@ alias boxDate='date +"%T"| toilet | boxes -d shell'
 
 # check language files
 alias ctf='wc -l /var/www/Work/card/src/assets/i18n/* |head -n 4|cut -d\  -f 3|sort|uniq|wc -l'
-
-# sbt alias
-alias sbtdebug='sbt -jvm-debug 9999 -Dconfig.resource=dev.conf run'

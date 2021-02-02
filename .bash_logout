@@ -18,5 +18,5 @@ then
 fi
 if [ $newalaises != "" ]
 then
-  alias > "/temp/new_alaiases_here"
+  alias > "/temp/new_aliases_here"
 fi
