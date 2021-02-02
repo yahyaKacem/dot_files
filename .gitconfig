@@ -1,6 +1,3 @@
-[user]
-  name = yahyaKacem
-  email = fuj.tyoli@gmail.com
 [credential]
   helper = cache --timeout=3600
 [color]
@@ -17,6 +14,3 @@
   external = /usr/local/bin/git-diff.sh
 [merge]
   tool = meld
-[github]
-  user = yahyaKacem
-  token = 5416c6abf4b0e407265dbcca8c8c33dbb98d4e5b
