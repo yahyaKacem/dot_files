@@ -1,0 +1,38 @@
+# Credentials and secrets
+.env
+.env.local
+credentials
+secrets
+*.key
+*.pem
+
+# Git config with personal tokens (if used locally)
+.gitconfig.local
+
+# System files
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+
+# Editor backups
+*.bak
+*.backup
+
+# Node/npm
+node_modules/
+npm-debug.log*
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+
+# IDE
+.vscode/
+.idea/
+*.iml
+
+# Local testing
+*.tmp
